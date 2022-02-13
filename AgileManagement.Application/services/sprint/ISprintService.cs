@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AgileManagement.Application
 {
-    public interface ISprintService:IApplicationService<AddSprintRequestDto,AddSprintResponseDto>
+    public interface ISprintService:IApplicationService<string, ListSprintResponseDto>
     {
     }
 }

@@ -22,14 +22,17 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
         private readonly IProjectWithContributorsRequestService _projectWithContributorsRequestService;
         private readonly IMapper _mapper;
         private readonly IContributorProjectAccessApprovementService _contributorProjectAccessApprovementService;
+        private readonly ISprintService _sprintService;
 
-        public ProjectController(IProjectRepository projectRepository, IUserRepository userRepository, IProjectWithContributorsRequestService projectWithContributorsRequestService, IMapper mapper, AuthenticatedUser authenticatedUser, IContributorProjectAccessApprovementService contributorProjectAccessApprovementService) : base(authenticatedUser)
+
+        public ProjectController(IProjectRepository projectRepository, IUserRepository userRepository, IProjectWithContributorsRequestService projectWithContributorsRequestService, IMapper mapper, AuthenticatedUser authenticatedUser, IContributorProjectAccessApprovementService contributorProjectAccessApprovementService, ISprintService sprintService) : base(authenticatedUser)
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
             _projectWithContributorsRequestService = projectWithContributorsRequestService;
             _mapper = mapper;
             _contributorProjectAccessApprovementService = contributorProjectAccessApprovementService;
+            _sprintService = sprintService;
         }
 
         public IActionResult Index()
@@ -118,6 +121,23 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
 
             return Json("OK");
 
+        }
+
+        [HttpGet]
+        public IActionResult AddSprintRequest(string projectId)
+        {
+            var response = _sprintService.OnProcess(projectId);
+            return View(response);
+        }
+
+
+
+        [HttpPost]
+        public JsonResult AddSprintRequest([FromBody] ContributorInputModel model)
+        {           
+
+
+            return Json("OK");
         }
     }
 }
