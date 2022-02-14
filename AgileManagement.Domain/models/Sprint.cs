@@ -9,19 +9,28 @@ namespace AgileManagement.Domain.models
 {
     public class Sprint:Entity
     {
-        public string Name { get; private set; } = "Sprint-";
-        public int SprintNo { get; private set; }
+        public string Name { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public Project Project { get; private set; }
         public bool isActive { get;private set; }
 
-        public Sprint(DateTime startDate, DateTime endDate)
+        public Sprint(DateTime startDate, DateTime endDate,string name)
         {
             Id = Guid.NewGuid().ToString();
             SetSprintDate(startDate, endDate);
             isActive = true;
+            SetName(name);            
         }
+        public void SetName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new Exception("İsim alanı boş geçilemez.");
+            }
+            Name=name.Trim();
+        }
+
         public void SetIsActive(bool IsActive)
         {
             if (isActive==IsActive)
@@ -29,16 +38,7 @@ namespace AgileManagement.Domain.models
                 throw new Exception("Hatalı işlem.");
             }
             isActive = IsActive;
-        }
-        
-        public void SetSprintNo(int sprintno)
-        {
-            if (sprintno<=0)
-            {
-                throw new Exception("Sprint No 0 ve 0'dan küçük olamaz.");
-            }
-            SprintNo = sprintno;
-        }
+        }         
        
         public void SetSprintDate(DateTime startDate, DateTime endDate)
         {
@@ -52,6 +52,6 @@ namespace AgileManagement.Domain.models
             }
             StartDate = startDate.Date;
             EndDate = endDate.Date;
-        }
+        }        
     }
 }
