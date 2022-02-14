@@ -3,13 +3,14 @@
     ViewData["Title"] = "AddSprintRequest";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@model AgileManagement.Application.ProjectDto
 
 <div class="container-fluid">
     <div class="row">
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-light col-md-4" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <span class="fs-4">Project Name</span>
+                <span class="fs-4">@Model.Name</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">

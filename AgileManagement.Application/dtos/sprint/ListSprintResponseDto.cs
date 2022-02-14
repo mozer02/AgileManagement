@@ -14,8 +14,5 @@ namespace AgileManagement.Application
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(14);
 
     }
-    public class ListSprintResponseDto
-    {
-        public List<ProjectDto> Projects = new List<ProjectDto>();
-    }
+    
 }

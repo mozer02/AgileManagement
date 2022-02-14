@@ -125,7 +125,7 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult AddSprintRequest(string projectId)
-        {
+            {
             var response = _sprintService.OnProcess(projectId);
             return View(response);
         }
