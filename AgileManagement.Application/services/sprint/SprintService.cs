@@ -19,14 +19,21 @@ namespace AgileManagement.Application
 
         public ListSprintResponseDto OnProcess(string projectId)
         {
-            var project = _projectRepository.GetQuery().Include(x => x.Sprints).Where(y => y.Id == projectId).SelectMany(a => a.Sprints).Select(z => new SprintDto
+            var project = _projectRepository.GetQuery().Include(x => x.Sprints).Where(y => y.Id == projectId).Select(a => new ProjectDto
             {
-                Name = z.Name + z.SprintNo.ToString(),
-                StartDate = z.StartDate,
-                EndDate = z.EndDate,
+                Name = a.Name,
+                Description = a.Description,
+                
+                Sprints = a.Sprints.Select(b => new SprintDto
+                {
+                    Name = b.Name,
+                    StartDate = b.StartDate,
+                    EndDate = b.EndDate,
+                    SprintNumber = b.SprintNo
+                }).ToList()
             }).ToList();
 
-            var respone = new ListSprintResponseDto { Sprints = project };
+            var respone = new ListSprintResponseDto { Projects = project };
             return respone;
         }
     }
