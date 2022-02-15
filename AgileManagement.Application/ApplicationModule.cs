@@ -24,6 +24,7 @@ namespace AgileManagement.Application
             services.AddScoped<IContributorProjectAccessApprovementService, ContributorProjectAccessApprovementService>();
             services.AddScoped<IConributorProjectList,ConributorProjectList>();
             services.AddScoped<ISprintService, SprintService>();
+            services.AddScoped<ISprintAddService, SprintAddService>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AgileManagement.Application;
 using AgileManagement.Domain;
+using AgileManagement.Domain.models;
 using AgileManagement.Mvc.Areas.Admin.Models;
 using AgileManagement.Mvc.Controllers;
 using AgileManagement.Mvc.Services;
@@ -23,9 +24,10 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly IContributorProjectAccessApprovementService _contributorProjectAccessApprovementService;
         private readonly ISprintService _sprintService;
+        private readonly ISprintAddService _sprintAddService;
 
 
-        public ProjectController(IProjectRepository projectRepository, IUserRepository userRepository, IProjectWithContributorsRequestService projectWithContributorsRequestService, IMapper mapper, AuthenticatedUser authenticatedUser, IContributorProjectAccessApprovementService contributorProjectAccessApprovementService, ISprintService sprintService) : base(authenticatedUser)
+        public ProjectController(IProjectRepository projectRepository, IUserRepository userRepository, IProjectWithContributorsRequestService projectWithContributorsRequestService, IMapper mapper, AuthenticatedUser authenticatedUser, IContributorProjectAccessApprovementService contributorProjectAccessApprovementService, ISprintService sprintService, ISprintAddService sprintAddService) : base(authenticatedUser)
         {
             _projectRepository = projectRepository;
             _userRepository = userRepository;
@@ -33,6 +35,7 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
             _mapper = mapper;
             _contributorProjectAccessApprovementService = contributorProjectAccessApprovementService;
             _sprintService = sprintService;
+            _sprintAddService = sprintAddService;
         }
 
         public IActionResult Index()
@@ -133,11 +136,12 @@ namespace AgileManagement.Mvc.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public JsonResult AddSprintRequest([FromBody] ContributorInputModel model)
-        {           
+        public JsonResult AddSprintRequest([FromBody] SprintInputModel model)
+        {
 
-
-            return Json("OK");
+            var dto = _mapper.Map<SprintInputModel, AddSprintRequestDto>(model);
+            var response = _sprintAddService.OnProcess(dto);
+            return Json(response);
         }
     }
 }

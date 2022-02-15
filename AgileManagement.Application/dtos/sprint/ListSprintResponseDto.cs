@@ -9,7 +9,6 @@ namespace AgileManagement.Application
     public class SprintDto
     {
         public string Name { get; set; }
-        public int SprintNumber { get; set; }
         public DateTime StartDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; } = DateTime.Now.AddDays(14);
 

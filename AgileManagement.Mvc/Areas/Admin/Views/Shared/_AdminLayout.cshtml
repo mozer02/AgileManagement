@@ -11,51 +11,54 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark text-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgileManagement.Mvc</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end">
 
-                        @if (User.Identity.IsAuthenticated)
-                        {
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgileManagement.Mvc</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex">
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
 
-
-
-            <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Admin" asp-controller="Project" asp-action="Management">My Projects</a>
-            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Project" asp-action="Create">New Project</a>
-                            </li>}
-
-
-                        @if (!User.Identity.IsAuthenticated)
-                        {
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
 
 
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Oturum Aç</a>
-            </li> }
-                        else
-                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Project" asp-action="Management">My Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="Admin" asp-controller="Project" asp-action="Create">New Project</a>
+                        </li>
+}
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>@User.Identity.Name</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Oturumu kapat</a>
-                </div>
-            </li>}
 
-                    </ul>
-                </div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Oturum Aç</a>
+                        </li>
+ }
+                    else
+                    {
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span>@User.Identity.Name</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Oturumu kapat</a>
+                            </div>
+                        </li>
+}
+
+                </ul>
             </div>
+
         </nav>
     </header>
     <div class="">

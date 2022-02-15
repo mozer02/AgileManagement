@@ -16,7 +16,7 @@ namespace AgileManagement.Persistence.EF
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB;Database=AgileManagementDb;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=AgileManagementDb;uid=sa;pwd=1234;");
 
             return new AppDbContext(optionsBuilder.Options);
         }

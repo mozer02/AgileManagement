@@ -80,5 +80,22 @@ namespace AgileManagement.Domain
             DomainEvent.Raise(new ContributorRevokeAccessEvent(this.Name,contributor.UserId));
         }
 
+        public void AddSprint(Sprint sprint)
+        {
+            var lastSprint = sprints.OrderByDescending(x => x.EndDate).FirstOrDefault();
+            if (sprints.Any(x => x.Name == sprint.Name))
+                {
+                throw new Exception("isimler aynı olamaz");
+                }
+            if (lastSprint!=null)
+            {
+                if (lastSprint.EndDate > sprint.StartDate)
+                {
+                throw new Exception("Başlangıç tarihiniz proje ile çalışıyor.");
+                }
+            }
+            
+            sprints.Add(sprint);
+        }
     }
 }
